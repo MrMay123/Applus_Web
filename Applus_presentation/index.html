@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Present</title>
+    <style>
+        :root {
+            --primary-color: #4dabf7;
+            --secondary-color: #74c0fc;
+            --accent-color: #339af0;
+            --background-color: #f8f9fa;
+            --text-color: #333333;
+            --light-gray: #e7e7e7;
+            --medium-gray: #cfcfcf;
+            --dark-gray: #737373;
+            --gradient-1: linear-gradient(135deg, #4dabf7, #74c0fc);
+            --gradient-2: linear-gradient(135deg, #339af0, #228be6);
+            --box-shadow: 0 10px 20px rgba(77, 171, 247, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--gradient-1);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.03),
+                rgba(255, 255, 255, 0.03) 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+            animation: headerBackground 30s linear infinite;
+        }
+
+        @keyframes headerBackground {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .app-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 30px;
+            margin-right: 2rem;
+            object-fit: cover;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .app-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav ul li {
+            flex: 1;
+            text-align: center;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 1.2rem 0.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-2);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        section:nth-child(even) {
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding: 0 1.5rem 0.5rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-2);
+            border-radius: 10px;
+        }
+
+        .section-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(77, 171, 247, 0.08);
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 1;
+        }
+
+        /* project description */
+        .overview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .overview-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(77, 171, 247, 0.2);
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-2);
+            z-index: 2;
+        }
+
+        .overview-card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .overview-card-body {
+            padding: 2rem;
+        }
+
+        .section-decoration {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .section-decoration-left {
+            left: 5%;
+        }
+
+        .section-decoration-right {
+            right: 5%;
+        }
+
+
+        section {
+            position: relative;
+        }
+
+
+        .overview-decoration-left {
+            top: 20%;
+            transform: rotate(-12deg);
+        }
+
+        .overview-decoration-right {
+            top: 60%;
+            transform: rotate(15deg);
+        }
+
+        .team-decoration-left {
+            top: 70%;
+            transform: rotate(-18deg);
+        }
+
+        .team-decoration-right {
+            top: 30%;
+            transform: rotate(10deg);
+        }
+
+        .demo-decoration-left {
+            top: 45%;
+            transform: rotate(45deg);
+        }
+
+        .demo-decoration-right {
+            top: 15%;
+            transform: rotate(50deg);
+        }
+
+        .postmortem-decoration-left {
+            top: 15%;
+            transform: rotate(-15deg);
+        }
+
+        .postmortem-decoration-right {
+            top: 55%;
+            transform: rotate(12deg);
+        }
+
+        .section-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card, .team-member, .postmortem-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .overview-card.animate, .team-member.animate, .postmortem-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* team member */
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(77, 171, 247, 0.25);
+        }
+
+        .team-member:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(51, 154, 240, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .team-member:hover:before {
+            opacity: 1;
+        }
+
+        .member-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 2rem auto 1.5rem;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .member-img {
+            transform: scale(1.05);
+        }
+
+        .member-info {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .member-name {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: var(--dark-gray);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        /* feature presentation */
+        .demo-container {
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* summary */
+        .postmortem-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .postmortem-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .postmortem-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--medium-gray);
+            padding-bottom: 0.5rem;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pros, .cons {
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .pros h4 {
+            color: #28a745;
+        }
+
+        .cons h4 {
+            color: #dc3545;
+        }
+
+        footer {
+            background: var(--gradient-1);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+        }
+
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        footer a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-1);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(77, 171, 247, 0.3);
+            z-index: 999;
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(77, 171, 247, 0.4);
+        }
+
+        .back-to-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .back-to-top:hover::before {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="app-header">
+            <div class="app-logo-container">
+                <img src="Applus.png" alt="App Logo" class="app-logo">
+                <h1>APPLUS Online Store</h1>
+            </div>
+            <p>Applus will be a store application that specializes in selling a wide range of school supplies and academic products for students, parents, teachers, or any user who is looking to buy these types of products.</p>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#team">Team Members</a></li>
+        <li><a href="#demo">Functionality</a></li>
+        <li><a href="#postmortem">Postmortem</a></li>
+    </ul>
+</nav>
+
+<section id="overview">
+    <div class="section-decoration section-decoration-left overview-decoration-left">
+        <img src="backpack.png" alt="Overview decoration left" style="width: 130px; height: 150px; border-radius: 16px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+
+    <div class="section-decoration section-decoration-right overview-decoration-right">
+        <img src="compass.png" alt="Overview decoration right" style="width: 150px; height: 150px; border-radius: 20px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+    <div class="container">
+        <div class="section-title" data-text="OVERVIEW">
+            <h2>Overview</h2>
+        </div>
+
+        <div class="overview-container">
+            <div class="overview-card">
+                <div class="overview-card-header">
+                    <h3>Vision Statement</h3>
+                </div>
+                <div class="overview-card-body">
+                    <p>The purpose of Applus is creating a simple and intuitive school shopping app to be used by students, teachers, parents, and companies. Applus strives to make the process of buying academic products convenient for users, whether it's making back-to-school shopping a quick and simple task, or making ordering supplies for an academic institution a job that can be completed all in one place.</p>
+                </div>
+            </div>
+
+            <div class="overview-card">
+                <div class="overview-card-header">
+                    <h3>Intended Users</h3>
+                </div>
+                <div class="overview-card-body">
+                    <p>Our school store application is going to keep in mind the different requirements of every school. Students can easily find school supplies, study materials, or even customized products for their personal use. Teachers or educators can use our app to purchase products that support classroom management and act as teaching aids, enhancing the effectiveness of education. Parents can use our app to purchase items for their children's needs, while school administrators can optimize bulk orders for institutional purposes. Our app offers a convenient and easy shopping experience that meets the needs of all groups. By considering the unique needs of each user, we help create a stronger connection to school life, making it more productive, organized, and enjoyable for everyone.</p>
+                </div>
+            </div>
+
+            <div class="overview-card">
+                <div class="overview-card-header">
+                    <h3>Functionality</h3>
+                </div>
+                <div class="overview-card-body">
+                    <p>Our app brings together all school supplies in one place, simplifying the shopping process for users. It allows users to create accounts or login to explore a diverse selection of products. Applus also makes it easy to browse and search for items, providing detailed descriptions with images and prices to help users make confident choices. Products can be added to a shopping cart for immediate purchase or saved to a wishlist for future consideration. During checkout, users can see the total price of the order, ensuring clarity and reliability in every purchase.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="team">
+    <div class="section-decoration section-decoration-left team-decoration-left">
+        <img src="cellphone.png" alt="Team decoration left" style="width: 150px; height: 150px; border-radius: 16px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+
+    <div class="section-decoration section-decoration-right team-decoration-right">
+        <img src="notebook.png" alt="Team decoration right" style="width: 170px; height: 170px; border-radius: 20px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+    <div class="container">
+        <div class="section-title" data-text="TEAM">
+            <h2>Team Members</h2>
+        </div>
+        <div class="team-container">
+            <div class="team-member">
+                <div class="member-info">
+                    <h3 class="member-name">Rey Jensen</h3>
+                    <p class="member-role">Developer</p>
+                    <p>During our time developing the project, I applied and extended my knowledge of databases and SQL-based languages. I learned how to properly set up an HSQLDB database in Android Studio that can be accessed by an application’s persistence layer. I gained some experience writing HSQLDB queries. I also learned how to write isolated code for each of the three layers that interacts with the other layers.</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-info">
+                    <h3 class="member-name">Mina Abdalmasih</h3>
+                    <p class="member-role">Developer</p>
+                    <p>While in the development of our app I was able to further my experience and knowledge of android studio and the creation of UI’s. I learned how to move from one page to another while passing down information using intents. I also gained knowledge in being able to implement many other UI features, such as, dropdown and side menus as well as how to go about to make clean UI features.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-info">
+                    <h3 class="member-name">Shuya Zhi</h3>
+                    <p class="member-role">Developer</p>
+                    <p>Throughout the development of the Andio Studio app, I gained experience in three-tier architecture, effectively integrating the presentation, business logic, and data layers into a fully functional application. I also strengthened my skills in UI development using Andio Studio, learning how to design and implement intuitive, responsive, and visually appealing interfaces while optimizing user interactions.</p>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-info">
+                    <h3 class="member-name">Jian Mei</h3>
+                    <p class="member-role">Developer</p>
+                    <p>From our project development, I learned how to build a GUI page for Android application and how to share information between different activities. I also learned how to build the structure of different layers for an app, each layer is for some specific functions. And I started to cooperate with other team members, separate works and reduce conflicts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="demo">
+    <div class="section-decoration section-decoration-left demo-decoration-left">
+        <img src="pen.png" alt="Demo decoration left" style="width: 140px; height: 140px; border-radius: 16px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+
+    <div class="section-decoration section-decoration-right demo-decoration-right">
+        <img src="mail.png" alt="Demo decoration right" style="width: 160px; height: 160px; border-radius: 20px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+    <div class="container">
+        <div class="section-title" data-text="DEMO">
+            <h2>Features Presentation</h2>
+        </div>
+
+        <div class="demo-container">
+            <p>Here's a video showing the main features of the project:</p>
+            <div class="video-container">
+                <video controls>
+                    <source src="Screen_recording_20250401_165310.webm" type="video/webm">
+                </video>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="postmortem">
+    <div class="section-decoration section-decoration-left postmortem-decoration-left">
+        <img src="ruler.png" alt="Postmortem decoration left" style="width: 145px; height: 145px; border-radius: 16px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+
+    <div class="section-decoration section-decoration-right postmortem-decoration-right">
+        <img src="calculator.png" alt="Postmortem decoration right" style="width: 165px; height: 165px; border-radius: 20px; box-shadow: 0 8px 16px rgba(77, 171, 247, 0.2);">
+    </div>
+    <div class="container">
+        <div class="section-title" data-text="REVIEW">
+            <h2>Postmortem</h2>
+        </div>
+
+        <div class="postmortem-container">
+            <div class="postmortem-item">
+                <h3>Improvement after iteration 2 retrospective</h3>
+                <p>In this iteration, we were able to accomplish this through more stringent testing and code review procedures. We had our integration tests run early and often with each code check-in, and bugs such as the one on the delete account function of the previous cycle were able to be caught before submission. In addition, our efforts to enhance class design in DSO were rewarded, as we eliminated setters and adhered more strictly to SOLID principles, which enhanced maintainability and stability of the code. Our methodology for tracking progress via goalposts and deadlines also helped us remain structured and efficient. Even while we were getting much better, we knew sharpening was an ongoing necessity, particularly in having rigorous code reviews to catch design flaws early on.
+                </p>
+            </div>
+
+            <div class="postmortem-item">
+                <h3>What took the most or least time?</h3>
+                <p>The design phase and team communication took the most time. Initially, we held discussions to align on the app concept, features, UI design, task distribution, and code structure. It was crucial to ensure everyone was on the same page to avoid redundant work or conflicting implementations. After that, learning to use Andio Studio effectively, especially translating our ideas into a functional UI, was also time-consuming since it was our first use.
+                    The least time-consuming phase was the actual implementation of features. Since we had already planned our approach, writing the code itself was relatively efficient.
+                    A surprising challenge emerged during integration testing. We encountered an issue where, in a test class with multiple tests, only the first test would pass. The problem was unrelated to the tests themselves but was due to a bug in our database cleanup process, which ran after each test. Initially, we were completely stuck, but after thorough research and debugging, we identified and fixed the issue, which was a rewarding experience. This reinforced the reality that unexpected issues are inevitable in development, but with teamwork and persistence, they can be resolved.
+                </p>
+            </div>
+
+            <div class="postmortem-item">
+                <h3>How did the project change?</h3>
+                <p>Our plan for our project started with a list of features and their corresponding user stories, and this plan has been mostly adapted into the final product. The project worked out as predicted for the most part, and development has gone relatively smoothly, although there were some alterations along the way. During our time working on the first iteration, we adjusted our plan and moved the “Shopping Cart” feature to iteration 2. We already had all of our requirements for iteration 1, and moving this feature allowed us to focus on more urgent additions. All of the planned features for iteration 2 were then implemented.
+                    After receiving our feedback for the second iteration, there were some bugs that we had not anticipated, but these were easily fixed during our work on iteration 3. At the start of iteration 3, when we sat down and discussed how we would work moving forward, we once again adjusted our plan and decided to not include “Delivery Time” and “Recommendations,” as features in our final submission. They were low-priority features and our time could be allocated to more important tasks.
+                    We completed the features assigned to the third iteration, and after making our final submission, our application was complete. There were not too many significant changes to our project in comparison to what we had initially envisioned, but we remained flexible and the changes that were present between iterations were consistent with our agile planning strategy.
+                </p>
+            </div>
+
+            <div class="postmortem-item">
+                <h3>What did we learn about team or large project development?</h3>
+                <p>We realized the importance of effective communication and delegation of work within a team setup through this project. Merging different features of the Android online store, such as search feature and product suggestion, required adequate coordination to be done to achieve smooth integration. We realized the importance of implementing version control and documentation to have a record of changes and preventing any conflicts in the process. Next time, we will start breaking down tasks into little milestones with tighter deadlines to optimize efficiency. We will keep on using version control and regular team meetings so everyone will be on the same page. However, we will avoid making last-minute fixes without thorough testing since it might introduce unexpected bugs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2025 APPLUS</p>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top">↑</a>
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    // Add click event handler to back to top button
+    backToTop.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Scroll to top of page smoothly
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // anime
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.overview-card, .team-member, .postmortem-item');
+
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.classList.add('animate');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', animateOnScroll);
+</script>
+</body>
+</html>
